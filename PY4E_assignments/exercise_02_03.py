@@ -5,3 +5,9 @@ You should use input to read a string and float() to convert the string to a num
 Do not worry about error checking or bad user data.
 '''
 
+hrs = input('Enter Hours: ')
+rate = input('Enter Rate: ')
+
+pay = float(hrs) * float(rate)
+
+print('Pay:', pay)
