@@ -11,4 +11,15 @@ Do not name your variable sum or use the sum() function.
 
 def computepay(hours, rate):
 
-    hours = input()
+    hours = input("Enter Hours:")
+    rate = input("Enter Rate:")
+
+    h = float(hours)
+    r = float(rate)
+
+    if h < 40:
+        print("Pay:", h * r)
+    else:
+        print("Pay:", (40 * r) + ((h - 40) * (1.5 * r)))
+if __name__ == '__main__':
+    computepay(h, r)
