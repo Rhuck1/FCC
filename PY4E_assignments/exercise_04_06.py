@@ -9,17 +9,17 @@ Do not worry about error checking the user input unless you want to - you can as
 Do not name your variable sum or use the sum() function. 
 '''
 
-def computepay(hours, rate):
+def computepay():
 
-    hours = input("Enter Hours:")
-    rate = input("Enter Rate:")
+    hours = input("Enter Hours: ")
+    rate = input("Enter Rate: ")
 
     h = float(hours)
     r = float(rate)
 
     if h < 40:
-        print("Pay:", h * r)
+        return print("Pay", h * r)
     else:
-        print("Pay:", (40 * r) + ((h - 40) * (1.5 * r)))
-if __name__ == '__main__':
-    computepay(h, r)
+        return print("Pay", (40 * r) + ((h - 40) * (1.5 * r)))
+
+computepay()
