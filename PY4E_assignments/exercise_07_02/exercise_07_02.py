@@ -40,5 +40,5 @@ for line in file_handle:
 
     spam_count += flt_val
 
-
+print("Average spam confidence:", spam_count / count)
 
