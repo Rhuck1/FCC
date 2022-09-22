@@ -29,7 +29,10 @@ for line in file_handle:
 
     if not line.startswith("From "):
         continue
-
+    
+    count += 1
     lst = line.split()
 
     print(lst[1])
+
+print("There were", count, "lines in the file with From as the first word")
