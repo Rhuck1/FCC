@@ -8,3 +8,26 @@ When the program completes, sort and print the resulting words in python sort() 
 You can download the sample data at http://www.py4e.com/code3/romeo.txt
 '''
 
+file_name = input("Enter file name: ")
+
+try:
+    file_handle = open(file_name)
+
+except:
+    print("File cannot be opened:", file_name)
+    quit()
+
+lst = []
+
+for line in file_handle:
+
+    line = line.rstrip()
+
+    split_line = line.split()
+
+    for word in split_line:
+        if word not in lst:
+            lst.append(word)
+
+lst.sort()
+print(lst)
