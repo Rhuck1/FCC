@@ -31,10 +31,10 @@ for line in file_handle:
     if not line.startswith("X-DSPAM-Confidence"):
         continue
 
-    count += 1
-    col_pos = text.find(':')
+    count += 1    
+    col_pos = line.find(':')
 
-    iso_text = text[col_pos + 1:]
+    iso_text = line[col_pos + 1:]
 
     flt_val = float(iso_text)
 
