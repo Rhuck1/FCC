@@ -13,3 +13,23 @@ Also look at the last line of the sample output to see how to print the count.
 You can download the sample data at http://www.py4e.com/code3/mbox-short.txt
 '''
 
+file_name = input("Enter file name: ")
+
+try:
+    file_handle = open(file_name)
+
+except:
+    print("File cannot be opened:", file_name)
+    quit()
+
+count = 0
+
+for line in file_handle:
+    line = line.rstrip()
+
+    if not line.startswith("From "):
+        continue
+
+    lst = line.split()
+
+    print(lst[1])
