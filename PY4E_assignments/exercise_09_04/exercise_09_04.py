@@ -12,6 +12,7 @@ try:
 
 except:
     print("File cannot be opened:", file_name)
+    quit()
 
 d = {}
 
@@ -43,7 +44,4 @@ for key, val in d.items():
         greatest = val
         author = key
 
-print()
-
-print(d)
-print("The most prolific author is", author, "with", d[author])
+print(author, d[author])
