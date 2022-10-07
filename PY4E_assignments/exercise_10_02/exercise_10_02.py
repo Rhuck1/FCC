@@ -47,7 +47,7 @@ for line in file_handle:
 
 sorted_d = sorted(d.items())
 
-for key, val in sorted_d.items():
+for key, val in sorted_d:
     print(key, val)
 
 
