@@ -37,5 +37,18 @@ for line in file_handle:
         time = word.split(':')
         hour = time[0]
 
-        print(type(time[0]))
+        if hour in d:
+
+            d[hour] += 1
+
+        else:
+
+            d[hour] = 1
+
+sorted_d = sorted(d.items())
+
+for key, val in sorted_d.items():
+    print(key, val)
+
+
 
