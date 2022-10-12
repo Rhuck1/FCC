@@ -11,3 +11,7 @@ import urllib.request
 url = 'http://data.pr4e.org/intro-short.txt'
 
 file_handle = urllib.request.urlopen(url)
+
+for line in file_handle:
+
+    print(line.decode().strip())
