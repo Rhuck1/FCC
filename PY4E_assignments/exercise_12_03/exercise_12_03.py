@@ -22,10 +22,15 @@ ctx.verify_mode = ssl.CERT_NONE
 
 url = 'http://py4e-data.dr-chuck.net/known_by_Fikret.html'
 #url = input('Enter URL: ')
+#process = input('Enter process loops: ')
+#position = input('Enter position: ')
+#
 html = urllib.request.urlopen(url, context=ctx).read()
 soup = BeautifulSoup(html, 'html.parser')
 
-tags = soup('span')
+process_count = 0
+
+tags = soup('a')
 for tag in tags:
 
     # Loops through tag and prints desired tag aspect
