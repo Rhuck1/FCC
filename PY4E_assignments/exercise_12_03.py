@@ -31,44 +31,42 @@ position = 18
 #process = input('Enter process loops: ')
 #position = input('Enter position: ')
 
-print(f'Retrieving: {url}')
+# print(f'Retrieving: {url}')
 
-url_list = []
-tag_list = []
-content_list = []
+# url_list = []
+# tag_list = []
+# content_list = []
 
-for index in range(process):
+# for index in range(process):
 
-    html = urllib.request.urlopen(url, context=ctx).read()
-    soup = BeautifulSoup(html, 'html.parser')
+#     html = urllib.request.urlopen(url, context=ctx).read()
+#     soup = BeautifulSoup(html, 'html.parser')
     
-    tags = soup('a')
+#     tags = soup('a')
 
-    process_counter = 0
-    position_counter = 0
+#     process_counter = 0
+#     position_counter = 0
 
-    for tag in tags:
+#     for tag in tags:
 
-        position_counter += 1
-        if position_counter == position:
-            url = str(tag.get('href', None))
-            print(f'Retrieving: {url}')
-            url_list.append(url)
-            tag_list.append(tag)
-            content_list.append(tag.contents[0])
-            position_counter = 0
-            break
+#         position_counter += 1
+#         if position_counter == position:
+#             url = str(tag.get('href', None))
+#             print(f'Retrieving: {url}')
+#             url_list.append(url)
+#             tag_list.append(tag)
+#             content_list.append(tag.contents[0])
+#             position_counter = 0
+#             break
 
-print("-----------------------------")
-print('URL List:', url_list)
-print("-----------------------------")
-print('Tag List:', tag_list)
-print("-----------------------------")
-print('Content List:', content_list)
-print("-----------------------------")
-print('Final Name:', content_list[-1])
-
-
+# print("-----------------------------")
+# print('URL List:', url_list)
+# print("-----------------------------")
+# print('Tag List:', tag_list)
+# print("-----------------------------")
+# print('Content List:', content_list)
+# print("-----------------------------")
+# print('Final Name:', content_list[-1])
 
     # Loops through tag and prints desired tag aspect
     # print('TAG:', tag)
@@ -76,31 +74,38 @@ print('Final Name:', content_list[-1])
     # print('Contents:', tag.contents[0])
     # print('Attrs:', tag.attrs)
 
-# url_list = []
-# #tag_list = []
+url_list = []
+tag_list = []
+content_list = []
 
-# process_count = 0
+process_count = 0
 
-# while process_count < process:
+while process_count < process:
 
-#     tag_list = []
-#     print('Retrieving: ', url)
-#     html = urllib.request.urlopen(url, context=ctx).read()
-#     soup = BeautifulSoup(html, 'html.parser')
-#     tags = soup('a')
+    for index in range(process):
 
-#     for index in range(process):
-        
-#         for tag in tags:
+        html = urllib.request.urlopen(url, context=ctx).read()
+        soup = BeautifulSoup(html, 'html.parser')
+        tags = soup('a')
+ 
+        for tag in tags:
             
+            print('Retrieving: ', url)
+            tag_list.append(tag)
+#             url = str(tag.get('href', None))
+#             print(f'Retrieving: {url}')
+#             url_list.append(url)
 #             tag_list.append(tag)
+#             content_list.append(tag.contents[0])
+#             position_counter = 0
+#             break
 
-#     url = tag_list[position-1].get('href', None)
-#     url_list.append(url)
+    url = tag_list[position-1].get('href', None)
+    url_list.append(url)
 
-#     process_count += 1
+    process_count += 1
     
 
-# print("url list:", url_list)
-# print("last url:", url)
-# #print("tag list:", tag_list)
+print("url list:", url_list)
+print("last url:", url)
+print("tag list:", tag_list)
