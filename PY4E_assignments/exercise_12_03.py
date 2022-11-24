@@ -25,8 +25,8 @@ The program below uses a range loop to accomplish the task
 '''
 
 url = input('Enter URL: ')
-process = input('Enter process loops: ')
-position = input('Enter position: ')
+process = int(input('Enter process loops: '))
+position = int(input('Enter position: '))
 
 # print(f'Retrieving: {url}')
 
