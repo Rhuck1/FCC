@@ -2,6 +2,7 @@
 A simple program that utilizes the XML parser ElementTree to 
 demonstrate the parsing of a simple XML string.
 '''
+
 import xml.etree.ElementTree as ET
 
 data = '''
