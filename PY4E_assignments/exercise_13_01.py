@@ -18,8 +18,8 @@ ctx = ssl.create_default_context()
 ctx.check_hostname = False
 ctx.verify_mode = ssl.CERT_NONE
 
-url = 'http://py4e-data.dr-chuck.net/comments_42.xml'
-# url = input('Enter URL: ')
+
+url = input('Enter URL: ')
 html = urllib.request.urlopen(url, context=ctx).read()
 tree = ET.fromstring(html)
 
@@ -27,15 +27,15 @@ print('Retrieving', url)
 
 counts_list = tree.findall('.//count')
 
+num_char_count = 0
+sum = 0
+
 for count in counts_list:
-    
+
+    sum += int(count.text)
+    num_char_count += len(count.text)
 
 
-
-
-
-
-
-# print('Retrieving ' + str() + 'characters')
-# print('Count: ', )
-# print('Sum:' )
+print('Retrieved ' + str(num_char_count) + ' numerical characters')
+print('Count:', len(counts_list))
+print('Sum:', sum)
