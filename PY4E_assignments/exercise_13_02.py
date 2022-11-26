@@ -4,7 +4,7 @@ read the JSON data from that URL using urllib and then parse and extract the com
 compute the sum of the numbers in the file
 
 Files below:
-    Sample data: 'http://py4e-data.dr-chuck.net/comments_42.json (Sum=2553)
+    Sample data: 'http://py4e-data.dr-chuck.net/comments_42.json' (Sum=2553)
     Actual data: 'http://py4e-data.dr-chuck.net/comments_1650656.json' (Sum ends with 70)
 '''
 
@@ -17,15 +17,22 @@ ctx = ssl.create_default_context()
 ctx.check_hostname = False
 ctx.verify_mode = ssl.CERT_NONE
 
+url = print('Enter URL: ')
+html = urllib.request.urlopen(url, context=ctx).read()
+data = json.loads(html)
 
+print('Retrieving', url)
 
+num_char_count = 0
+sum = 0
 
+for item in data['comments']:
 
+    sum += item['count']
+    for char in str(item['count']):
+        num_char_count += 1
+    
 
-# info = json.loads(data)
-# print('User count:', len(info))
-
-# for item in info:
-#     print('Name:', item['name'])
-#     print('Id:', item['id'])
-#     print('Attribute:', item['x'])
+print('Retrieved ' + str(num_char_count) + ' numerical characters')
+print('Count:', len(data['comments']))
+print('Sum:', sum)
