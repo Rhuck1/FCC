@@ -5,12 +5,14 @@ import json
 import sqlite3
 import ssl
 
+# Need to edit the hidden.py file in order for this script to work
+
 TWITTER_URL = 'https://api.twitter.com/1.1/friends/list.json'
 
 conn = sqlite3.connect('spider.sqlite')
-cur = con.cursor()
+cur = conn.cursor()
 
-cur.execute('CREATE TABLE IF NOT EXISTS Twitter')
+cur.execute('CREATE TABLE IF NOT EXISTS Twitter (name TEXT, retrieved INTEGER, friends INTEGER)')
 
 # Ignore SSL certificate errors
 ctx = ssl.create_default_context()
@@ -55,7 +57,7 @@ while True:
             cur_execute('UPDATE Twitter SET friends = ? WHERE name = ?', (count + 1, friend))
             countold = countold + 1
         except:
-            cur.execute('INSERT INTO Twitter (name, retrieved, friends) VALUES (?, 0, 1')', (friend, ))
+            cur.execute('INSERT INTO Twitter (name, retrieved, friends) VALUES (?, 0, 1)', (friend, ))
             countnew = countnew + 1
 
     print('New accounts=', countnew, ' revisited=', countold)
