@@ -1,11 +1,11 @@
-import xml.tree.ElementTree as ET
+import xml.etree.ElementTree as ET
 import sqlite3
 
 conn = sqlite3.connect('trackdb.sqlite')
 cur = conn.cursor()
 
 # Make some fresh tables using executescript()
-cur.executescript('
+cur.executescript('''
 DROP TABLE IF EXISTS Artist;
 DROP TABLE IF EXISTS Album;
 DROP TABLE IF EXISTS Track;
@@ -22,12 +22,12 @@ CREATE TABLE Album (
 );
 
 CREATE TABLE Track (
-    id  INTEGER NOT NULL PRIMARY AUTOINCREMENT UNIQUE,
+    id  INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
     title  TEXT UNIQUE,
     album_id INTEGER,
     len INTEGER, rating INTEGER, count INTEGER
 );
-')
+''')
 
 
 fname = input('Enter file name: ')
@@ -65,19 +65,19 @@ for entry in all:
 
     print(name, artist, album, count, rating, length)
 
-    cur.execute('INSERT OR IGNORE INTO Artist (name) 
-        VALUES (?)', (artist, ))
+    cur.execute('''INSERT OR IGNORE INTO Artist (name) 
+        VALUES (?)''', (artist, ))
     cur.execute('SELECT id FROM Artist WHERE name = ?', (artist, ))
-    album_id = cur.fetchone()[0]
+    artist_id = cur.fetchone()[0]
 
-    cur.execute('INSERT OR REPLACE INTO Album (title, artist_id) 
-        VALUES (?, ?)', (album, artist_id))
+    cur.execute('''INSERT OR REPLACE INTO Album (title, artist_id) 
+        VALUES (?, ?)''', (album, artist_id))
     cur.execute('SELECT id FROM Album WHERE title = ?', (album, ))
     album_id = cur.fetchone()[0]
 
-    cur.execute('INSERT OR REPLACE INTO Track
+    cur.execute('''INSERT OR REPLACE INTO Track
         (title, album_id, len, rating, count)
-        VALUES (?, ?, ?, ?, ?)',
+        VALUES (?, ?, ?, ?, ?)''',
         (name, album_id, length, rating, count))
 
     conn.commit()
