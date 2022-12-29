@@ -60,3 +60,5 @@ while True:
 
     print('New accounts=', countnew, ' revisited=', countold)
     conn.commit()
+
+cur.close()
