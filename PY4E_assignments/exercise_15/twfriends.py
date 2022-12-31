@@ -1,4 +1,4 @@
-import urllib.request, urllib.parse, url.error
+import urllib.request, urllib.parse, urllib.error
 import twurl
 import json
 import sqlite3
@@ -50,4 +50,53 @@ while True:
             
             id = cur.lastrowid
 
-    url = 
+    url = twurl.augment(TWITTER_URL, {'screen_name': acct, 'count': '100'})
+    print('Retrieving account', acct)
+
+    try:
+        connection = urllib.request.urlopen(url, context=ctx)
+    except Exception as err:
+        print('Failed to Retrieve', err)
+        break
+
+    # Debugging
+    # print(json.dumps(js, indent=4))
+
+    if 'users' not in js:
+        print('Incorrect JSON received')
+        print(json.dumps(js, indent=4))
+        continue
+
+    cur.execute('UPDATE People SET retrieved = 1 WHERE name = ?', (acct, ))
+
+    countnew = 0
+    countold = 0
+    
+    for u in js['users']:
+        friend = u['screen_name']
+        print(friend)
+        cur.execute('SELECT id FROM People WHERE name = ? LIMIT 1', (friend, ))
+
+        try:
+            friend_id = cur.fetchone()[0]
+            countold = countold + 1
+        except:
+            cur.execute('''INSERT OR IGNORE INTO People (name, retrieved)
+                VALUES (?, 0)''', (friend, ))
+            conn.commit()
+
+            if cur.rowcount != 1:
+                print('Error inserting account:', friend)
+                continue
+            
+            friend_id = cur.lastrowid
+            countnew = countnew + 1
+
+        cur.execute('''INSERT OR IGNORE UNTO Follows (from_id, to_id)
+            VALUES (?, ?)''', (id, friend_id))
+
+    print('New accounts =', countnew, ' revisited =', countold)
+    print('Remaining', headers['x-rate-limit-remaining'])
+    conn.commit()
+
+cur.close()
