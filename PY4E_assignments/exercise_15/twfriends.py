@@ -4,6 +4,8 @@ import json
 import sqlite3
 import ssl
 
+# Need to edit the hidden.py file in order for this script to work
+
 TWITTER_URL = 'https://api.twitter.com/1.1/friends/list.json'
 
 conn = sqlite3.connect('friends.sqlite')
