@@ -35,7 +35,7 @@ import xml.etree.ElementTree as ET
 import sqlite3
 
 conn = sqlite3.connect('Librarydb.sqlite')
-cur conn.cursor()
+cur = conn.cursor()
 
 # Make some new tables using executescript()
 cur.executescript('''
@@ -104,9 +104,9 @@ for entry in all:
     rating = lookup(entry, 'Rating')
     length = lookup(entry, 'Total Time')
 
-    if name is None or artist is None or album is None: continue
+    if name is None or artist is None or album is None or genre is None: continue
 
-    print(name, artist, album, count, rating, length)
+    print(name, artist, album, count, rating, length, genre)
 
     cur.execute('''INSERT OR IGNORE INTO Artist (name) 
         Values (?)''', (artist, ))
@@ -115,11 +115,11 @@ for entry in all:
 
     cur.execute('''INSERT OR IGNORE INTO Genre (name) 
         Values (?)''', (genre, ))
-    cur.execute('SELECT id FROM Artist WHERE name = ?', (genre, ))
+    cur.execute('SELECT id FROM Genre WHERE name = ?', (genre, ))
     genre_id = cur.fetchone()[0]
 
-    cur.execute('''INSERT OR IGNORE INTO Album (title, artist_id) 
-        Values (?, ?)''', (album, artist_id))
+    cur.execute('''INSERT OR IGNORE INTO Album (artist_id, title) 
+        Values (?, ?)''', (artist_id, album))
     cur.execute('SELECT id FROM Album WHERE title = ?', (album, ))
     album_id = cur.fetchone()[0]
 
