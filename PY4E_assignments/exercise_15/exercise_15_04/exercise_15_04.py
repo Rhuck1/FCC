@@ -14,7 +14,7 @@ conn = sqlite3.connect('rosterdb.sqlite')
 cur = conn.cursor()
 
 # Performing Setup
-cur.execute('''
+cur.executescript('''
 DROP TABLE IF EXISTS User;
 DROP TABLE IF EXISTS Course;
 DROP TABLE IF EXISTS Member;
@@ -63,11 +63,11 @@ for entry in json_data:
 
     cur.execute('''INSERT OR IGNORE INTO Course (title)
         VALUES (?)''', (title, ))
-    cur.execute('SELECT id from User WHERE name = ?', (tutke, ))
+    cur.execute('SELECT id from Course WHERE title = ?', (title, ))
     course_id = cur.fetchone()[0]
 
     cur.execute('''INSERT OR REPLACE INTO Member
         (user_id, course_id, role) VALUES (?, ?, ?)''',
         (user_id, course_id, role))
 
-conn.commit()
+    conn.commit()

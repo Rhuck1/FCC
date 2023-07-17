@@ -64,5 +64,7 @@ while True:
 
     # print(json.dumps(js, indent=4))
 
-    place_id = js.
+    place_id = js['results'][0]['place_id']
+
+    print('Place ID:', place_id)
 

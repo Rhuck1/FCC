@@ -12,7 +12,7 @@ The data file for this application is: http://www.py4e.com/code3/mbox.txt
 
 import sqlite3
 
-conn = sqlite3.connect('mboxdb')
+conn = sqlite3.connect('mboxdb.sqlite')
 cur = conn.cursor()
 
 cur.execute('DROP TABLE IF EXISTS Counts')
@@ -26,22 +26,22 @@ fh = open(fname)
 for line in fh:
 
     if not line.startswith('From: '): continue
-    pieces = line.split()
-    email = pieces[1]
 
-    cur.execute('SELECT count from FROM Counts WHERE email = ?', (email, ))
+    org = line.split()[1].split('@')[1]
+
+    cur.execute('SELECT count FROM Counts WHERE org = ?', (org, ))
     row = cur.fetchone()
 
     if row is None:
-        cur.execute('''INSERT INTO Coutns (email, count)
-            VALUES (?, 1)''', (email, ))
+        cur.execute('''INSERT INTO Counts (org, count)
+            VALUES (?, 1)''', (org, ))
 
     else:
-        cur.execute('UPDATE Counts SET count = count + 1 WHERE email = ?', (email, ))
+        cur.execute('UPDATE Counts SET count = count + 1 WHERE org = ?', (org, ))
 
     conn.commit()
 
-sqlstr = 'SELECT email, count from Counts ORDER BY count DESC LIMIT 10'
+sqlstr = 'SELECT org, count FROM Counts ORDER BY count DESC LIMIT 10'
 
 for row in cur.execute(sqlstr):
     print(str(row[0]), row[1])
