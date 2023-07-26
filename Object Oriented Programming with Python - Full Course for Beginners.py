@@ -7,17 +7,19 @@ Instructional video link: https://www.youtube.com/watch?v=Ej_02ICOIgs
 
 class Item:
 
-    def calculate_total_price(self, x, y):
+    def __init__(self, name: str, price: float, quantity=0):
+        
+        self.name = name
+        self.price = price
+        self.quantity = quantity
 
-        return x * y
+    def calculate_total_price(self):
 
-item1 = Item()
-item1.name = "Phone"
-item1.price = 100
-item1.quantity = 5
-print(item1.calculate_total_price(item1.price, item1.quantity))
+        return self.price * self.quantity
 
-item2 = Item()
-item2.name = "Laptop"
-item2.price = 1000
-item2.quantity = 3
+item1 = Item("Phone", 100, 1)
+
+item2 = Item("Laptop", 1000, 3)
+
+print(item1.calculate_total_price())
+print(item2.calculate_total_price())
