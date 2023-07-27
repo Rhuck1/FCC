@@ -4,8 +4,8 @@ In this complete tutorial, I will learn all about OOP and how to implement it us
 
 Instructional video link: https://www.youtube.com/watch?v=Ej_02ICOIgs
 '''
-
 import csv
+
 
 class Item:
 
@@ -17,7 +17,7 @@ class Item:
         
         # Run validations to the received arguments
         assert price >= 0, f"Price {price} is not greater than or equal to zero"
-        assert quantity >= 0, f"Quantity {price} is not greater than or equal to zero"
+        assert quantity >= 0, f"Quantity {quantity} is not greater than or equal to zero"
 
         # Assign to self object
         self.name = name
@@ -64,4 +64,33 @@ class Item:
         return f"Item('{self.name}', '{self.price}', '{self.quantity}')"
     
 
-print(Item.is_integer(7.5))
+class Phone(Item):
+
+    all = []
+
+    def __init__(self, name: str, price: float, quantity=0, broken_phones=0):
+
+        # Call to super function to have access to all attribures & methods
+        # This call to super replaces the need for rewriting assertions and self
+        # assignments that already exist in parent class Item
+        super().__init__(
+            name, price, quantity
+        )
+        
+        # Run validations to the received arguments
+        # assert price >= 0, f"Price {price} is not greater than or equal to zero"
+        # assert quantity >= 0, f"Quantity {quantity} is not greater than or equal to zero"
+        assert broken_phones >= 0, f"Broken Phones {broken_phones} is not greater than or equal to zero"
+
+        # Assign to self object
+        # self.name = name
+        # self.price = price
+        # self.quantity = quantity
+        self.broken_phones = broken_phones
+
+        # Actions to execute
+        Phone.all.append(self)
+
+phone1 = Phone("jscPhonev10", 500, 5, 1)
+print(phone1.calculate_total_price())
+phone2 = Phone("jscPhonev10", 700, 5, 1)
