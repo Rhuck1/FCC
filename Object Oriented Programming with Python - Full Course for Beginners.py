@@ -9,6 +9,11 @@ class Item:
 
     def __init__(self, name: str, price: float, quantity=0):
         
+        # Run validations to the received arguments
+        assert price >= 0, f"Price {price} is not greater than or equal to zero"
+        assert quantity >= 0, f"Quantity {price} is not greater than or equal to zero"
+
+        # Assign to self object
         self.name = name
         self.price = price
         self.quantity = quantity
