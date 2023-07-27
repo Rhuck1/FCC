@@ -64,6 +64,4 @@ class Item:
         return f"Item('{self.name}', '{self.price}', '{self.quantity}')"
     
 
-Item.instantiate_from_csv()
-
-print(Item.all)
+print(Item.is_integer(7.5))
