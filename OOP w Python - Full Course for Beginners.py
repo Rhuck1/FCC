@@ -20,12 +20,20 @@ class Item:
         assert quantity >= 0, f"Quantity {quantity} is not greater than or equal to zero"
 
         # Assign to self object
-        self.name = name
+        self.__name = name
         self.price = price
         self.quantity = quantity
 
         # Actions to execute
         Item.all.append(self)
+
+    # Property Decorator = Read-Only Attribute
+    def name(self):
+        return self.__name
+    
+    @name.setter
+    def name(self, value):
+        self.__name = value
 
     def calculate_total_price(self):
 
@@ -61,12 +69,15 @@ class Item:
             return False
 
     def __repr__(self):
-        return f"Item('{self.name}', '{self.price}', '{self.quantity}')"
+        return f"{self.__class__.__name__}('{self.name}', '{self.price}', '{self.quantity}')"
     
+    # @property
+    # def read_only_name(self):
+    #     return "AAA"
 
 class Phone(Item):
 
-    all = []
+    # all = [] Now redudant bc of call to super function
 
     def __init__(self, name: str, price: float, quantity=0, broken_phones=0):
 
@@ -88,9 +99,10 @@ class Phone(Item):
         # self.quantity = quantity
         self.broken_phones = broken_phones
 
-        # Actions to execute
-        Phone.all.append(self)
+        # # Actions to execute     Now redundant bc of call to super function
+        # Phone.all.append(self)
 
 phone1 = Phone("jscPhonev10", 500, 5, 1)
-print(phone1.calculate_total_price())
-phone2 = Phone("jscPhonev10", 700, 5, 1)
+
+print(Item.all)
+print(Phone.all)
