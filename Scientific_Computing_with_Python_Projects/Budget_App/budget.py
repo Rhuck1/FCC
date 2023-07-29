@@ -26,7 +26,7 @@ class Category:
         else:
             return False
 
-    def get_balance(self):
+    def get_balance(self, amount, description):
         return Category.balance
 
     def transfer(self):
