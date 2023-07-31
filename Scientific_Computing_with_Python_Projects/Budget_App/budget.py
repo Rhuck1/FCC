@@ -1,36 +1,33 @@
-
-
 class Category:
 
-    items = []
-    ledger = []
-    balance = 0.00
-
-    def __init__(self, name):
+    def __init__(self, category):
         print("Initialization successful")
         # Assign to self object
-        self.name = name
-
-        # Actions to execute
-        Category.items.append(self)
+        self.category = category
+        self.ledger = []
+        self.balance = 0.0
 
     def deposit(self, amount, description=""):
-        Category.ledger.append({"amount": amount, "description": description})
-        Category.balance += float(amount)
+        self.ledger.append({"amount": amount, "description": description})
+        self.balance += float(amount)
 
     def withdraw(self, amount, description=""):
-        if Category.balance + (-amount) > 0:
-             Category.ledger.append({"amount": (-amount), "description": description})
-             Category.balance += float(-amount)
+        if self.balance + (-1.0 * amount) > 0:
+             self.ledger.append({"amount": (-1.0 * amount), "description": description})
+             self.balance += float(-1.0 * amount)
              return True
         else:
             return False
 
-    def get_balance(self, amount, description):
-        return Category.balance
+    def get_balance(self):
+        return self.balance
 
-    def transfer(self):
-        pass
+    def transfer(self, amount, category):
+        if amount > self.get_balance(self):
+            return False
+        else:
+            self.withdraw(amount, f"Transfer to {category}")
+            self.deposit(amount, f"Transfer from {}")
 
     def check_funds(self):
         pass
@@ -44,9 +41,9 @@ class Category:
 def create_spend_chart(categories):
     pass
 
+
+
 cat1 = Category("food")
 cat1.deposit(250)
-cat1.withdraw(10, "cats")
-print(cat1.ledger)
-print(cat1.balance)
+print(cat1.withdraw(300, "cats"))
 print(cat1.get_balance())

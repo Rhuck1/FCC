@@ -96,3 +96,12 @@ class Item:
         self.__connect("")
         self.__prepare_body()
         self.__send()
+
+
+itm1 = Item("Phn", 100, 1)
+itm2 = Item("Laptp", 1000, 3)
+itm3 = Item("Cable", 10, 5)
+itm4 = Item("Mouse", 50, 5)
+itm5 = Item("Keyb", 75, 5)
+
+print(Item.all)

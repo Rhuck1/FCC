@@ -28,6 +28,7 @@ class Item:
         Item.all.append(self)
 
     # Property Decorator = Read-Only Attribute
+    @property
     def name(self):
 
         return self.__name
