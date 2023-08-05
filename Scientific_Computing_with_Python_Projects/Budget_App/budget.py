@@ -1,9 +1,9 @@
 class Category:
 
-    def __init__(self, category):
+    def __init__(self, description):
         print("Initialization successful")
         # Assign to self object
-        self.category = category
+        self.description = description
         self.ledger = []
         self.balance = 0.0
 
@@ -28,17 +28,17 @@ class Category:
         else:
             return True 
 
-    def transfer(self, amount, category_selection):
+    def transfer(self, amount, category):
         if amount > self.get_balance():
             return False
         else:
-            self.withdraw(amount, f"Transfer to {category_selection.category}")
-            self.deposit(amount, f"Transfer from {category_selection.self.category}")
+            self.withdraw(amount, f"Transfer to {category.description}")
+            self.deposit(amount, f"Transfer from {self.description}")
             return True
 
     def __repr__(self):
-
-        return f""
+        title_line = self.catdescriptionegory.center(30, "*")
+        return title_line
 
 
 def create_spend_chart(categories):
@@ -66,4 +66,5 @@ cat1.transfer(100, 'clothing')
 
 print(cat1.check_funds(260))
 
-print(cat1.ledger)
+print(cat1)
+
