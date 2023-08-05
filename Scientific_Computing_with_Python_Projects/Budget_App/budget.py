@@ -21,20 +21,24 @@ class Category:
 
     def get_balance(self):
         return self.balance
+    
+    def check_funds(self, amount):
+        if amount >= self.get_balance():
+            return False
+        else:
+            return True 
 
-    def transfer(self, amount, category):
+    def transfer(self, amount, category_selection):
         if amount > self.get_balance():
             return False
         else:
-            self.withdraw(amount, f"Transfer to {category}")
-            self.deposit(amount, f"Transfer from {self.category}")
+            self.withdraw(amount, f"Transfer to {category_selection.category}")
+            self.deposit(amount, f"Transfer from {category_selection.self.category}")
             return True
 
-    def check_funds(self):
-        pass
-
     def __repr__(self):
-        pass
+
+        return f""
 
 
 def create_spend_chart(categories):
@@ -57,3 +61,9 @@ print(cat2.transfer(200, "food"))
 
 print(cat1.get_balance())
 print(cat2.get_balance())
+
+cat1.transfer(100, 'clothing')
+
+print(cat1.check_funds(260))
+
+print(cat1.ledger)
