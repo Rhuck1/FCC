@@ -45,24 +45,35 @@ class Category:
 
 def create_spend_chart(categories):
 
-    chart = "Percentage spent by category\n"
-
     names_list = []
+    withdraw_list = []
     
     # Formatting names retreived from class instance and placing into list
-    for category.categories:
+    for category in categories:
         names = category.category
         names_list.append(names)
         height = len(max(names_list, key=len))
         formatted = [name.ljust(height) for name in names_list]
     
     # Retreiving percentages from class instance spend and placing into list
+        withdraw_total = 0
+        for item in category.ledger:
+            amount = item['amount']
+            if amount < 0:
+                withdraw_total += amount
+        withdraw_list.append(withdraw_total)
+    total = int(round(sum(withdraw_list)))
 
-    percentages = [10, 70, 30]
+    percentages = []
+
+    for val in withdraw_list:
+        per = val * 100 / total
+        percent = round(per//10) * 10
+        percentages.append(percent)
 
     bottom_chart_width = 2 * len(categories) + 4
-    
-    
+
+    chart = "Percentage spent by category\n"
 
     for num in reversed(range(0, 110, 10)):
 
@@ -76,12 +87,10 @@ def create_spend_chart(categories):
 
         chart += " \n"
 
-
     chart += "     " + ("-" * bottom_chart_width) + "\n"
 
-    for name in zip(*formatted_categories):
-        chart += "      " + ("  ".join(name)) + " \n"
-
+    for row in zip(*formatted):
+        chart += "      " + ("  ".join(row)) + " \n"
     
 
     return chart.rstrip('\n')
