@@ -44,30 +44,19 @@ class Category:
         return header + ledger + total
 
 def create_spend_chart(categories):
-    pass
+    
+    title = "Percentage spent by category\n"
+
+    for num in reversed(range(0, 110, 10)):
+
+        title += str(num) + "|" + "\n"
+
+    for name in zip(*categories):
+        print(name)
+
+    
+
+    return title
 
 
-# cat1 = Category("food")
-# cat2 = Category("entertainment")
-
-# cat1.deposit(250)
-# cat2.deposit(1000)
-
-# print(cat1.get_balance())
-# print(cat2.get_balance())
-
-
-# # print(cat2.transfer(200, "food"))
-
-# # print(cat1.get_balance())
-# # print(cat2.get_balance())
-
-# # cat1.transfer(100, 'clothing')
-
-
-
-# # print(cat1.withdraw(300, "cats"))
-# # print(cat2.withdraw(20, "turkey meatz"))
-
-# # print(cat1)
 
