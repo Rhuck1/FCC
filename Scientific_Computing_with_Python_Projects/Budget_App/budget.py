@@ -45,17 +45,33 @@ class Category:
 
 def create_spend_chart(categories):
 
-    bottom_chart_width = 2 * len(categories) + 2
-    
     chart = "Percentage spent by category\n"
+
+    height = len(max(categories, key=len))
+    formatted_categories = [names.ljust(height) for names in categories]
+
+    percentages = [10, 70, 30]
+
+    bottom_chart_width = 2 * len(categories) + 4
+    
+    
 
     for num in reversed(range(0, 110, 10)):
 
-        chart += f"{num}|\n".rjust(5)
+        chart += f"{num}|".rjust(5)
 
-    chart += ("-" * bottom_chart_width + "\n").rjust(bottom_chart_width)
+        for percent in percentages:
+            if percent >= num:
+                chart += " o "
+            else:
+                chart += "   "
 
-    for name in zip(*categories):
+        chart += "\n"
+
+
+    chart += ("-" * bottom_chart_width + "\n").ljust(bottom_chart_width + 5)
+
+    for name in zip(*formatted_categories):
         chart += " " + ("  ".join(name) + "\n").rjust(bottom_chart_width)
 
     
