@@ -47,8 +47,16 @@ def create_spend_chart(categories):
 
     chart = "Percentage spent by category\n"
 
-    height = len(max(categories, key=len))
-    formatted_categories = [names.ljust(height) for names in categories]
+    names_list = []
+    
+    # Formatting names retreived from class instance and placing into list
+    for category.categories:
+        names = category.category
+        names_list.append(names)
+        height = len(max(names_list, key=len))
+        formatted = [name.ljust(height) for name in names_list]
+    
+    # Retreiving percentages from class instance spend and placing into list
 
     percentages = [10, 70, 30]
 
@@ -66,17 +74,17 @@ def create_spend_chart(categories):
             else:
                 chart += "   "
 
-        chart += "\n"
+        chart += " \n"
 
 
-    chart += ("-" * bottom_chart_width + "\n").ljust(bottom_chart_width + 5)
+    chart += "     " + ("-" * bottom_chart_width) + "\n"
 
     for name in zip(*formatted_categories):
-        chart += " " + ("  ".join(name) + "\n").rjust(bottom_chart_width)
+        chart += "      " + ("  ".join(name)) + " \n"
 
     
 
-    return chart
+    return chart.rstrip('\n')
 
 
 
