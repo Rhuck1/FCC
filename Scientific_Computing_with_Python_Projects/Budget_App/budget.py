@@ -44,19 +44,23 @@ class Category:
         return header + ledger + total
 
 def create_spend_chart(categories):
+
+    bottom_chart_width = 2 * len(categories) + 2
     
-    title = "Percentage spent by category\n"
+    chart = "Percentage spent by category\n"
 
     for num in reversed(range(0, 110, 10)):
 
-        title += str(num) + "|" + "\n"
+        chart += f"{num}|\n".rjust(5)
+
+    chart += ("-" * bottom_chart_width + "\n").rjust(bottom_chart_width)
 
     for name in zip(*categories):
-        print(name)
+        chart += " " + ("  ".join(name) + "\n").rjust(bottom_chart_width)
 
     
 
-    return title
+    return chart
 
 
 
