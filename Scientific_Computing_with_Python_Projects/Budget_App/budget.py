@@ -9,11 +9,12 @@ class Category:
         self.ledger.append({"amount": amount, "description": description})
 
     def withdraw(self, amount, description=""):
-        if self.get_balance() >= amount:
+        can_withdraw = self.check_funds(amount)
+
+        if can_withdraw:
              self.ledger.append({"amount": (-1.0 * amount), "description": description})
-             return True
-        else:
-            return False
+
+        return can_withdraw
 
     def get_balance(self):
         tot_balance = float(sum([item['amount'] for item in self.ledger]))
@@ -26,11 +27,13 @@ class Category:
             return True 
 
     def transfer(self, amount, budget_category):
-        if self.withdraw(amount, f"Transer to {budget_category.category}"):
-            return False
-        else:
-            budget_category.deposit(amount, f"Transfer from {budget_category.category}")
-            return True
+        can_transfer = self.check_funds(amount)
+
+        if can_transfer:
+            self.withdraw(amount, f"Transfer to {budget_category.category}")
+            budget_category.deposit(amount, f"Transfer from {self.category}")
+        
+        return can_transfer
 
     def __repr__(self):
         total = f"Total: " + f"{self.get_balance():.2f}"
@@ -77,7 +80,7 @@ def create_spend_chart(categories):
 
     for num in reversed(range(0, 110, 10)):
 
-        chart += f"{num}|".rjust(5)
+        chart += f"{num}|".rjust(4)
 
         for percent in percentages:
             if percent >= num:
@@ -87,10 +90,10 @@ def create_spend_chart(categories):
 
         chart += " \n"
 
-    chart += "     " + ("-" * bottom_chart_width) + "\n"
+    chart += "    " + ("-" * bottom_chart_width) + "\n"
 
     for row in zip(*formatted):
-        chart += "      " + ("  ".join(row)) + " \n"
+        chart += "     " + ("  ".join(row)) + "  \n"
     
 
     return chart.rstrip('\n')
