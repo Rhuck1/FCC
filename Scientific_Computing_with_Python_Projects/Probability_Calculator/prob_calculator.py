@@ -13,10 +13,9 @@ class Hat:
 
         # Actions to execute
         for key, val in self.args.items():
-            count = 0
-            while count != val:
-                Hat.contents.append(str(key))
-                count += 1
+            Hat.contents.extend([key for idx in range(val)])
+
+        print(Hat.contents)
 
     def draw(self, draws: int):
 
