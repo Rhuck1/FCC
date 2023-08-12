@@ -50,5 +50,4 @@ def experiment(hat, expected_balls, num_balls_drawn, num_experiments):
             M += 1
             experiments += 1
 
-
     return M / N
