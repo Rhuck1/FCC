@@ -11,9 +11,11 @@ class Hat:
         # Assign to self object
         self.args = args
 
+        self.contents = []
         # Actions to execute
-        for key, val in self.args.items():
-            Hat.contents.extend([key for idx in range(val)])
+        # for key, val in self.args.items():
+            # Hat.contents.extend([key for idx in range(val)])
+        Hat.contents.extend( ([key for idx in range(val)]) for key, val in self.args.items())
 
     def draw(self, draws: int):
 
