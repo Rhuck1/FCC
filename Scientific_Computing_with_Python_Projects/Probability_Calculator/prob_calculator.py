@@ -15,8 +15,6 @@ class Hat:
         for key, val in self.args.items():
             Hat.contents.extend([key for idx in range(val)])
 
-        print(Hat.contents)
-
     def draw(self, draws: int):
 
         assert draws > 0, "Number of draws must be greater than 0"
@@ -24,9 +22,10 @@ class Hat:
         if draws > len(Hat.contents):
             return Hat.contents
         else:
-            pass
+            return random.sample(Hat.contents, draws)
     
 
 
 def experiment(hat, expected_balls, num_balls_drawn, num_experiments):
-    pass
+    
+    print("experiment")
