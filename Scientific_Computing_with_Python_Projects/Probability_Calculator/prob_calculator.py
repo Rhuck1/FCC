@@ -27,28 +27,28 @@ class Hat:
 
 
 def experiment(hat, expected_balls, num_balls_drawn, num_experiments):
-
-    def count_balls(lst, x):
-        return lst.count(x)
     
     experiments = 0
     N = num_experiments
     M = 0
     while experiments != num_experiments:
 
-
-
         draw = hat.draw(num_balls_drawn)
-        # draw_set = set(draw)
-        # for color in draw_set:
-        #     color_count = draw.count(color)
             
-        exp_results = {color: draw.count(color) for color in set(draw)}
-        # You are returning experiment results!!!
-        # compare exp_results to expected_balls and if you get at least then M += 1
-        print(exp_results)
+        draw_results = {color: draw.count(color) for color in set(draw)}
 
-        experiments += 1
+        try:
+            comparison = all((draw_results.get(key) >= val for key, val in expected_balls.items()))
+
+        except:
+            comparison = False
+
+        if not comparison:
+            experiments += 1
+            continue
+        else:
+            M += 1
+            experiments += 1
 
 
     return M / N
