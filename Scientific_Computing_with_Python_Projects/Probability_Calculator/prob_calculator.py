@@ -4,28 +4,28 @@ import random
 
 class Hat:
 
-    contents = []
-
     def __init__(self, **args):
 
         # Assign to self object
         self.args = args
-
         self.contents = []
+        self.contents_copy = copy.deepcopy(self.contents)
+
         # Actions to execute
-        # for key, val in self.args.items():
-            # Hat.contents.extend([key for idx in range(val)])
-        Hat.contents.extend( ([key for idx in range(val)]) for key, val in self.args.items())
+        for key, val in self.args.items():
+            self.contents.extend([key for idx in range(val)])
 
     def draw(self, draws: int):
 
         assert draws > 0, "Number of draws must be greater than 0"
 
-        if draws > len(Hat.contents):
-            return Hat.contents
+        if draws > len(self.contents):
+            return self.contents
         else:
-            return random.sample(Hat.contents, draws)
-    
+            samp_draw = random.sample(self.contents, draws)
+            for color in samp_draw:
+                self.contents.remove(color)
+            return samp_draw
 
 
 def experiment(hat, expected_balls, num_balls_drawn, num_experiments):
@@ -35,7 +35,9 @@ def experiment(hat, expected_balls, num_balls_drawn, num_experiments):
     M = 0
     while experiments != num_experiments:
 
-        draw = hat.draw(num_balls_drawn)
+        hat_copy = copy.deepcopy(hat)
+
+        draw = hat_copy.draw(num_balls_drawn)
             
         draw_results = {color: draw.count(color) for color in set(draw)}
 
