@@ -9,7 +9,6 @@ class Hat:
         # Assign to self object
         self.args = args
         self.contents = []
-        self.contents_copy = copy.deepcopy(self.contents)
 
         # Actions to execute
         for key, val in self.args.items():

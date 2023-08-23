@@ -25,6 +25,6 @@ hat2 = Hat(blue=3,red=2,green=6)
 
 
 
-actual = hat2.draw(4)
+actual = hat2.draw(3)
 print("actual:", actual)
 print("length:", len(hat2.contents))
